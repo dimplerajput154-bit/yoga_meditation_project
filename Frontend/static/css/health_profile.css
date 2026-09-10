@@ -1,0 +1,1075 @@
+
+/* =====================================================
+   HEALTH PROFILE
+   Wellness Theme
+   ===================================================== */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --dark-green: #18594c;
+
+    --green: #4d8f4c;
+
+    --light-green: #eaf4e6;
+
+    --very-light-green: #f5f8f1;
+
+    --cream: #fbfaf5;
+
+    --white: #ffffff;
+
+    --text: #26332b;
+
+    --gray: #7d857e;
+
+    --border: #e5e5de;
+
+}
+
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            120deg,
+            #fbfaf6,
+            #f5f7f1
+        );
+
+    color: var(--text);
+
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+   ===================================================== */
+
+.app-container {
+
+    display: flex;
+
+    min-height: 100vh;
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+   ===================================================== */
+
+.sidebar {
+
+    width: 135px;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #185b4e,
+            #154e43
+        );
+
+    color: white;
+
+    padding:
+        18px
+        10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* LOGO */
+
+.logo-section {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+
+}
+
+
+.logo-icon {
+
+    font-size: 30px;
+
+}
+
+
+.logo-section h2 {
+
+    font-size: 15px;
+
+    margin-top: 2px;
+
+}
+
+
+.logo-section p {
+
+    font-size: 7px;
+
+    opacity: .75;
+
+}
+
+
+/* MENU */
+
+.sidebar-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        8px
+        7px;
+
+    border-radius: 6px;
+
+    color:
+        rgba(255,255,255,.88);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    transition: .2s;
+
+}
+
+
+.menu-item span {
+
+    width: 17px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+}
+
+
+.menu-item:hover {
+
+    background:
+        rgba(255,255,255,.12);
+
+}
+
+
+.menu-item.active {
+
+    background: #4c9460;
+
+    color: white;
+
+}
+
+
+.logout {
+
+    margin-top: auto;
+
+}
+
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+.main-content {
+
+    flex: 1;
+
+    padding:
+        0
+        25px
+        35px;
+
+}
+
+
+/* =====================================================
+   TOPBAR
+   ===================================================== */
+
+.topbar {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+}
+
+
+/* SEARCH */
+
+.search-container {
+
+    width: 310px;
+
+    height: 37px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        0
+        13px;
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 20px;
+
+}
+
+
+.search-icon {
+
+    color: #9b9f99;
+
+    font-size: 18px;
+
+}
+
+
+.search-container input {
+
+    border: none;
+
+    outline: none;
+
+    width: 100%;
+
+    margin-left: 8px;
+
+    font-size: 10px;
+
+}
+
+
+/* TOP RIGHT */
+
+.top-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.notification {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 17px;
+
+    position: relative;
+
+    cursor: pointer;
+
+}
+
+
+.notification span {
+
+    position: absolute;
+
+    top: -5px;
+
+    right: -5px;
+
+    background: #e43737;
+
+    color: white;
+
+    font-size: 7px;
+
+    padding: 2px 4px;
+
+    border-radius: 10px;
+
+}
+
+
+.profile-mini {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 10px;
+
+}
+
+
+.avatar {
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background:
+        #e2ecd9;
+
+    color:
+        var(--green);
+
+    display: grid;
+
+    place-items: center;
+
+    font-weight: bold;
+
+}
+
+
+/* =====================================================
+   PAGE HEADER
+   ===================================================== */
+
+.page-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        25px
+        0
+        18px;
+
+}
+
+
+.page-header h1 {
+
+    font-size: 22px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.page-header p {
+
+    color: var(--gray);
+
+    font-size: 11px;
+
+}
+
+
+.status-pill {
+
+    padding:
+        7px
+        13px;
+
+    border-radius: 20px;
+
+    background:
+        var(--light-green);
+
+    color:
+        #427541;
+
+    font-size: 9px;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+   ===================================================== */
+
+.message-box {
+
+    padding:
+        10px
+        14px;
+
+    margin-bottom: 14px;
+
+    border-radius: 7px;
+
+    background:
+        var(--light-green);
+
+    color:
+        #39713a;
+
+    font-size: 11px;
+
+}
+
+
+.message-box.error {
+
+    background: #fdeaea;
+
+    color: #c44747;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+/* =====================================================
+   LAYOUT
+   ===================================================== */
+
+.profile-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        275px;
+
+    gap: 18px;
+
+}
+
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+
+.profile-card,
+.card {
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(40,60,45,.035);
+
+}
+
+
+/* =====================================================
+   PROFILE CARD
+   ===================================================== */
+
+.profile-card {
+
+    padding: 18px 20px;
+
+}
+
+
+/* =====================================================
+   TABS
+   ===================================================== */
+
+.tabs {
+
+    display: flex;
+
+    gap: 7px;
+
+    padding-bottom: 12px;
+
+    margin-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+
+}
+
+
+.tab {
+
+    border: none;
+
+    background: transparent;
+
+    color: #777;
+
+    padding:
+        8px
+        12px;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+}
+
+
+.tab:hover {
+
+    background:
+        var(--light-green);
+
+    color:
+        var(--green);
+
+}
+
+
+.tab.active {
+
+    background:
+        var(--green);
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.form-section {
+
+    margin-bottom: 21px;
+
+}
+
+
+.form-section h3 {
+
+    font-size: 13px;
+
+    margin-bottom: 13px;
+
+}
+
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 14px;
+
+}
+
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+.input-group label {
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    color: #59635b;
+
+}
+
+
+.input-group label span {
+
+    color: #999;
+
+    font-weight: normal;
+
+}
+
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+
+    width: 100%;
+
+    border:
+        1px solid
+        #dedfd9;
+
+    border-radius: 7px;
+
+    padding:
+        10px
+        11px;
+
+    background: white;
+
+    outline: none;
+
+    font-size: 10px;
+
+    color: #333;
+
+}
+
+
+.input-group textarea {
+
+    min-height: 72px;
+
+    resize: vertical;
+
+}
+
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+
+    border-color:
+        #78a871;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(120,168,113,.1);
+
+}
+
+
+/* ERRORS */
+
+.error {
+
+    color: #c64b4b;
+
+    font-size: 8px;
+
+    min-height: 10px;
+
+}
+
+
+/* MEDICAL */
+
+.medical-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 14px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.form-footer {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    border-top:
+        1px solid
+        var(--border);
+
+    padding-top: 15px;
+
+}
+
+
+#lastUpdated {
+
+    color: #999;
+
+    font-size: 8px;
+
+}
+
+
+.save-button {
+
+    border: none;
+
+    background:
+        var(--green);
+
+    color: white;
+
+    padding:
+        10px
+        23px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+}
+
+
+.save-button:hover {
+
+    background:
+        #39753c;
+
+}
+
+
+.save-button:disabled {
+
+    opacity: .6;
+
+}
+
+
+/* =====================================================
+   RIGHT COLUMN
+   ===================================================== */
+
+.right-column {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+.card {
+
+    padding: 18px;
+
+}
+
+
+/* =====================================================
+   BMI
+   ===================================================== */
+
+.card-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+}
+
+
+.card-heading h3,
+.body-card h3,
+.tip-card h3 {
+
+    font-size: 13px;
+
+}
+
+
+.bmi-value {
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    margin-top: 20px;
+
+}
+
+
+.bmi-status {
+
+    color:
+        var(--green);
+
+    font-size: 10px;
+
+    margin-top: 3px;
+
+}
+
+
+.bmi-bar {
+
+    margin-top: 27px;
+
+}
+
+
+.bmi-gradient {
+
+    height: 8px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d9e9d2 0%,
+            #79a96e 50%,
+            #d9c6a8 100%
+        );
+
+}
+
+
+.bmi-labels {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    color: #999;
+
+    font-size: 8px;
+
+    margin-top: 5px;
+
+}
+
+
+/* =====================================================
+   BODY STATS
+   ===================================================== */
+
+.stat {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    padding:
+        13px
+        0;
+
+    border-bottom:
+        1px solid
+        #eeeeea;
+
+    font-size: 10px;
+
+}
+
+
+.stat span {
+
+    color: #8a918b;
+
+}
+
+
+.stat strong {
+
+    color: #39443c;
+
+}
+
+
+.card-note {
+
+    margin-top: 13px;
+
+    color: #929792;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   WELLNESS TIP
+   ===================================================== */
+
+.tip-card {
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 17px;
+
+    border-radius: 11px;
+
+    background:
+        #f0f7ec;
+
+    border:
+        1px solid
+        #dcebd7;
+
+}
+
+
+.tip-leaf {
+
+    font-size: 25px;
+
+}
+
+
+.tip-card p {
+
+    color: #778078;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    margin-top: 5px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width: 950px) {
+
+    .profile-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width: 700px) {
+
+    .sidebar {
+
+        width: 65px;
+
+    }
+
+
+    .logo-section h2,
+    .logo-section p,
+    .menu-item label {
+
+        display: none;
+
+    }
+
+
+    .menu-item {
+
+        justify-content: center;
+
+    }
+
+
+    .main-content {
+
+        padding:
+            0
+            12px
+            25px;
+
+    }
+
+
+    .form-grid,
+    .medical-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .search-container {
+
+        width: 180px;
+
+    }
+
+}

@@ -1,0 +1,986 @@
+
+/* =====================================================
+   WELLNESS - HEALTH & REMEDIES
+   Frontend CSS
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-green: #164d3a;
+    --green: #4f8d4b;
+    --light-green: #e7f0df;
+    --cream: #faf8f1;
+    --white: #ffffff;
+    --text: #202722;
+    --gray: #777d78;
+    --border: #e5e5df;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+}
+
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
+.app-shell {
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 230px;
+
+    background: var(--dark-green);
+    color: white;
+
+    padding: 20px 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+}
+
+
+/* =====================================================
+   WELLNESS LOGO
+===================================================== */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 5px 10px 25px;
+}
+
+.brand-leaf {
+    font-size: 30px;
+}
+
+.brand h2 {
+    font-size: 19px;
+    line-height: 1.2;
+    color: white;
+}
+
+.brand span {
+    font-size: 8px;
+    color: #e9f3ec;
+}
+
+
+/* =====================================================
+   SIDEBAR NAVIGATION
+===================================================== */
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 9px 10px;
+
+    border-radius: 7px;
+
+    color: #edf5ef;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+.nav-item span {
+    width: 18px;
+
+    text-align: center;
+
+    color: white;
+}
+
+
+/* Hover */
+
+.nav-item:hover {
+    background: #347253;
+    color: white;
+}
+
+
+/* Active menu */
+
+.nav-item.active {
+    background: #4f9066;
+    color: white;
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.logout {
+    margin-top: auto;
+
+    border-top: 1px solid rgba(255,255,255,0.18);
+
+    padding: 15px 10px 5px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.logout:hover {
+    color: white;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+    margin-left: 230px;
+
+    width: calc(100% - 230px);
+
+    min-height: 100vh;
+
+    background: var(--cream);
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar {
+    height: 62px;
+
+    background: rgba(255,255,255,0.92);
+
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+
+/* =====================================================
+   TOP SEARCH
+===================================================== */
+
+.top-search {
+    width: 300px;
+    height: 34px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 13px;
+
+    color: #888;
+}
+
+.top-search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    font-size: 10px;
+
+    color: #444;
+}
+
+.top-search input::placeholder {
+    color: #999;
+}
+
+
+/* =====================================================
+   TOP ACTIONS
+===================================================== */
+
+.top-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.icon-btn {
+    position: relative;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 18px;
+}
+
+.icon-btn b {
+    position: absolute;
+
+    top: -5px;
+    right: -6px;
+
+    background: #e53935;
+
+    color: white;
+
+    min-width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    font-size: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-btn {
+    border: none;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 11px;
+
+    color: #222;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: #eeeeea;
+
+    display: grid;
+    place-items: center;
+}
+
+
+/* =====================================================
+   PAGE HEADING
+===================================================== */
+
+.page-heading {
+    padding: 27px 30px 15px;
+}
+
+.page-heading h1 {
+    font-size: 23px;
+
+    margin-bottom: 5px;
+
+    color: #202722;
+}
+
+.page-heading p {
+    font-size: 11px;
+
+    color: var(--gray);
+}
+
+
+/* =====================================================
+   SEARCH CARD
+===================================================== */
+
+.search-card {
+    margin: 0 30px 14px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding: 12px;
+}
+
+.search-box {
+    height: 42px;
+
+    border: 1px solid #e1e2dc;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 12px;
+}
+
+.search-box > span {
+    font-size: 20px;
+
+    color: #888;
+}
+
+.search-box input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    font-size: 11px;
+}
+
+.clear-btn {
+    border: none;
+
+    background: transparent;
+
+    color: var(--green);
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   FILTER BUTTONS
+===================================================== */
+
+.filters {
+    padding: 0 30px 18px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.filter {
+    border: 1px solid #dedfd7;
+
+    background: white;
+
+    color: #646a65;
+
+    padding: 7px 13px;
+
+    border-radius: 15px;
+
+    font-size: 9px;
+}
+
+.filter:hover,
+.filter.active {
+    background: var(--green);
+
+    border-color: var(--green);
+
+    color: white;
+}
+
+
+/* =====================================================
+   CONTENT GRID
+===================================================== */
+
+.content-grid {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 230px;
+
+    gap: 18px;
+
+    padding: 0 30px;
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 13px;
+}
+
+.section-title h2 {
+    font-size: 15px;
+
+    color: #202722;
+}
+
+.section-title p {
+    font-size: 9px;
+
+    color: var(--gray);
+
+    margin-top: 4px;
+}
+
+.green-btn {
+    border: none;
+
+    background: var(--green);
+
+    color: white;
+
+    border-radius: 6px;
+
+    padding: 8px 12px;
+
+    font-size: 9px;
+}
+
+.green-btn:hover {
+    background: #417b3e;
+}
+
+
+/* =====================================================
+   REMEDY GRID
+===================================================== */
+
+.remedy-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 11px;
+}
+
+
+/* =====================================================
+   REMEDY CARD
+===================================================== */
+
+.remedy-card {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    padding: 13px;
+
+    min-height: 150px;
+
+    transition: 0.2s ease;
+}
+
+.remedy-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.remedy-top {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+}
+
+.remedy-icon {
+    width: 37px;
+    height: 37px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: var(--light-green);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 18px;
+}
+
+.remedy-card h3 {
+    font-size: 12px;
+
+    margin-bottom: 5px;
+
+    color: #202722;
+}
+
+.remedy-card .symptoms {
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    color: var(--gray);
+}
+
+.remedy-preview {
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    color: #555c56;
+
+    margin-top: 10px;
+}
+
+.view-btn {
+    border: none;
+
+    background: transparent;
+
+    color: var(--green);
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    margin-top: 9px;
+
+    padding: 0;
+}
+
+.view-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================================
+   IMPORTANT NOTE
+===================================================== */
+
+.info-card {
+    background: #edf3e2;
+
+    border: 1px solid #dce7d0;
+
+    border-radius: 10px;
+
+    padding: 17px;
+
+    min-height: 230px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.info-icon {
+    font-size: 22px;
+
+    margin-bottom: 7px;
+}
+
+.info-card h3 {
+    font-size: 13px;
+
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    font-size: 9px;
+
+    line-height: 1.6;
+
+    color: #5e665f;
+
+    margin-bottom: 9px;
+}
+
+.plant {
+    position: absolute;
+
+    right: 8px;
+
+    bottom: 0;
+
+    font-size: 65px;
+
+    opacity: 0.65;
+}
+
+
+/* =====================================================
+   STATUS MESSAGE
+===================================================== */
+
+.status-message {
+    background: #fff2e5;
+
+    color: #895d2c;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    margin-bottom: 12px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(15,40,30,0.5);
+}
+
+.modal-box {
+    position: relative;
+
+    z-index: 2;
+
+    width: 600px;
+
+    max-width: calc(100% - 30px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f1f2ed;
+
+    font-size: 21px;
+
+    color: #555;
+}
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.modal-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 12px;
+
+    background: var(--light-green);
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 24px;
+}
+
+.small-label {
+    color: var(--green);
+
+    font-size: 9px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+
+    margin-top: 3px;
+}
+
+.detail-block {
+    padding: 13px 0;
+
+    border-top: 1px solid var(--border);
+}
+
+.detail-block h4 {
+    font-size: 11px;
+
+    margin-bottom: 6px;
+}
+
+.detail-block p {
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    color: #606861;
+}
+
+.detail-block.warning {
+    background: #fff8e9;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border-top: none;
+
+    margin-top: 7px;
+}
+
+.detail-block.warning h4 {
+    color: #8b6b25;
+}
+
+.detail-block.doctor {
+    background: #fff1ed;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border-top: none;
+
+    margin-top: 8px;
+}
+
+.detail-block.doctor h4 {
+    color: #a04e39;
+}
+
+.educational-note {
+    margin-top: 13px;
+
+    background: #f2f5ef;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    color: #606860;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    margin: 28px 30px 0;
+
+    padding-top: 14px;
+
+    border-top: 1px solid var(--border);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #8a908c;
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .main-content {
+        margin-left: 190px;
+
+        width: calc(100% - 190px);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        min-height: 170px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        width: 60px;
+
+        padding: 15px 7px;
+    }
+
+    .brand > div:last-child {
+        display: none;
+    }
+
+    .nav-item {
+        justify-content: center;
+
+        font-size: 0;
+    }
+
+    .nav-item span {
+        font-size: 17px;
+    }
+
+    .logout {
+        justify-content: center;
+
+        font-size: 0;
+    }
+
+    .logout span {
+        font-size: 18px;
+    }
+
+    .main-content {
+        margin-left: 60px;
+
+        width: calc(100% - 60px);
+    }
+
+    .top-search {
+        width: 45%;
+    }
+
+    .top-actions span:not(.avatar) {
+        display: none;
+    }
+
+    .page-heading {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .search-card {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .filters {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .content-grid {
+        padding: 0 15px;
+
+        grid-template-columns: 1fr;
+    }
+
+    .remedy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}

@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness | Health & Remedies</title>
+    <!-- Old CSS path commented out because remedies.css is inside static/css -->
+   <!--<link rel="stylesheet" href="remedies.css">-->
+   <link rel="stylesheet" href="../static/css/remedies.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-leaf">🌿</div>
+            <div>
+                <h2>Wellness</h2>
+                <span>Good Health, Better You.</span>
+            </div>
+        </div>
+
+        <nav class="side-nav">
+            <a href="#" class="nav-item"><span>⌂</span> Dashboard</a>
+            <a href="#" class="nav-item"><span>♧</span> Yoga</a>
+            <a href="#" class="nav-item"><span>◉</span> Meditation</a>
+            <a href="#" class="nav-item"><span>☯</span> Mental Wellness</a>
+            <a href="#" class="nav-item"><span>▣</span> Recipes</a>
+            <a href="#" class="nav-item"><span>▤</span> Books</a>
+            <a href="#" class="nav-item"><span>◷</span> Sleep Tracker</a>
+            <a href="#" class="nav-item"><span>☻</span> Mood Tracker</a>
+            <a href="#" class="nav-item"><span>♙</span> Health Profile</a>
+            <a href="#" class="nav-item active"><span>✚</span> Health & Remedies</a>
+            <a href="#" class="nav-item"><span>✦</span> AI Assistant</a>
+            <a href="#" class="nav-item"><span>♡</span> Favorites</a>
+            <a href="#" class="nav-item"><span>⇩</span> Downloads</a>
+            <a href="#" class="nav-item"><span>⚙</span> Settings</a>
+        </nav>
+
+        <a href="#" class="logout"><span>⇥</span> Logout</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div class="mini-brand">
+                <span>🌿</span>
+                <strong>Wellness</strong>
+            </div>
+
+            <div class="top-search">
+                <span>⌕</span>
+                <input id="topSearch" type="text" placeholder="Search yoga, recipes, books...">
+            </div>
+
+            <div class="top-actions">
+                <button class="icon-btn" title="Notifications">♧<b>2</b></button>
+                <button class="profile-btn">
+                    <span class="avatar">👩</span>
+                    <span>Hi, Ananya</span>
+                    <span>⌄</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Page heading -->
+        <section class="page-heading">
+            <div>
+                <h1>Health & Remedies</h1>
+                <p>Natural solutions and self-care information for common health concerns.</p>
+            </div>
+        </section>
+
+        <!-- Search -->
+        <section class="search-card">
+            <div class="search-box">
+                <span>⌕</span>
+                <input id="remedySearch" type="text"
+                       placeholder="Search health remedies, e.g. cold, cough, headache...">
+                <button id="clearSearch" class="clear-btn" type="button">Clear</button>
+            </div>
+        </section>
+
+        <!-- Filter chips -->
+        <section class="filters">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="cold">Common Cold</button>
+            <button class="filter" data-filter="cough">Cough</button>
+            <button class="filter" data-filter="headache">Headache</button>
+            <button class="filter" data-filter="digestion">Indigestion</button>
+            <button class="filter" data-filter="stress">Stress</button>
+            <button class="filter" data-filter="sleep">Sleep</button>
+            <button class="filter" data-filter="skin">Skin</button>
+        </section>
+
+        <div class="content-grid">
+
+            <!-- Remedies -->
+            <section class="remedies-section">
+                <div class="section-title">
+                    <div>
+                        <h2>Common Health Concerns</h2>
+                        <p id="resultText">Loading remedies...</p>
+                    </div>
+                    <button id="refreshBtn" class="green-btn" type="button">↻ Refresh</button>
+                </div>
+
+                <div id="statusMessage" class="status-message hidden"></div>
+                <div id="remedyGrid" class="remedy-grid"></div>
+            </section>
+
+            <!-- Important note -->
+            <aside class="info-card">
+                <div class="info-icon">🌿</div>
+                <h3>Important Note</h3>
+                <p>
+                    These remedies are for general wellness and self-care information.
+                    They are not a substitute for professional medical advice.
+                </p>
+                <p>
+                    Please consult a doctor if symptoms are severe, persistent,
+                    unusual, or getting worse.
+                </p>
+                <div class="plant">🪴</div>
+            </aside>
+        </div>
+
+        <footer>
+            <span>Wellness • Health & Remedies</span>
+            <span>Educational information only</span>
+        </footer>
+    </main>
+</div>
+
+<!-- Remedy details modal -->
+<div id="remedyModal" class="modal hidden">
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-box">
+        <button id="closeModal" class="modal-close" type="button">×</button>
+
+        <div class="modal-header">
+            <div id="modalIcon" class="modal-icon">🌿</div>
+            <div>
+                <span class="small-label">Health & Self-Care</span>
+                <h2 id="modalTopic">Remedy</h2>
+            </div>
+        </div>
+
+        <div class="detail-block">
+            <h4>Common Symptoms</h4>
+            <p id="modalSymptoms"></p>
+        </div>
+
+        <div class="detail-block care">
+            <h4>Self-Care Information</h4>
+            <p id="modalCare"></p>
+        </div>
+
+        <div class="detail-block warning">
+            <h4>Precautions</h4>
+            <p id="modalPrecautions"></p>
+        </div>
+
+        <div class="detail-block doctor">
+            <h4>When to Consult a Doctor</h4>
+            <p id="modalDoctor"></p>
+        </div>
+
+        <div class="educational-note">
+            <strong>Note:</strong> This information is educational and does not diagnose
+            or treat a medical condition.
+        </div>
+    </div>
+</div>
+<!-- Old JS path commented out because remedies.js is inside static/js -->
+<!--<script src="remedies.js"></script>-->
+<script src="../static/js/remedies.js"></script>
+</body>
+</html>

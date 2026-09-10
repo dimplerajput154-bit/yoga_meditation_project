@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sleep Tracker | Wellness</title>
+
+    <!-- for Flask backend connecting-->
+    <!--
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/sleep_tracker.css') }}">
+    -->
+
+    <!-- Live Server preview -->
+    <link rel="stylesheet" href="../static/css/sleep_track.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🌿</div>
+
+            <div>
+                <h2>Wellness</h2>
+                <span>Good Health. Better You.</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="#" class="menu-item">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♧</span>
+                Yoga
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>◉</span>
+                Meditation
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>☻</span>
+                Mental Wellness
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♨</span>
+                Recipes
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▤</span>
+                Books
+            </a>
+
+            <a href="#" class="menu-item active">
+                <span>◔</span>
+                Sleep Tracker
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>☺</span>
+                Mood Tracker
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♙</span>
+                Health Profile
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>✚</span>
+                Health & Remedies
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>✦</span>
+                AI Assistant
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♡</span>
+                Favorites
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⇩</span>
+                Downloads
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <a href="#" class="logout">
+            <span>↪</span>
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="page-title">
+                <h1>Sleep Tracker</h1>
+                <p>Track your sleep and improve your rest.</p>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="search-box">
+                    🔍
+                    <input type="text"
+                           placeholder="Search your wellness...">
+                </div>
+
+                <div class="notification">
+                    ♧
+                    <span class="notification-dot"></span>
+                </div>
+
+                <div class="profile">
+                    <div class="profile-avatar">A</div>
+
+                    <div class="profile-name">
+                        <strong>Hi, Ananya</strong>
+                        <span>⌄</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= MESSAGE ================= -->
+
+        <div id="messageBox" class="message-box"></div>
+
+
+        <!-- ================= PAGE HEADER ================= -->
+
+        <section class="welcome-section">
+
+            <div>
+                <h2>Sleep well, live better 🌙</h2>
+
+                <p>
+                    Keep track of your sleep habits and understand
+                    your rest patterns.
+                </p>
+            </div>
+
+            <button class="primary-btn" id="addSleepBtn">
+                + Add Sleep Record
+            </button>
+
+        </section>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="card-icon moon">🌙</div>
+
+                <div>
+                    <span>Average Sleep</span>
+                    <h2 id="averageSleep">--</h2>
+                    <small>Across your records</small>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon green">✓</div>
+
+                <div>
+                    <span>Sleep Quality</span>
+                    <h2 id="qualityValue">--</h2>
+                    <small>Based on recent records</small>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon blue">☀</div>
+
+                <div>
+                    <span>Last Sleep</span>
+                    <h2 id="lastSleep">--</h2>
+                    <small>Most recent record</small>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon purple">📅</div>
+
+                <div>
+                    <span>Total Records</span>
+                    <h2 id="totalRecords">0</h2>
+                    <small>Sleep records tracked</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MAIN GRID ================= -->
+
+        <section class="content-grid">
+
+
+            <!-- LEFT: TODAY'S SLEEP -->
+
+            <div class="card today-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>Today's Sleep</h3>
+                        <p>Your latest sleep details</p>
+                    </div>
+
+                    <span class="status-badge" id="todayQuality">
+                        --
+                    </span>
+
+                </div>
+
+
+                <div class="sleep-circle">
+
+                    <div class="circle-inner">
+
+                        <span>Sleep Duration</span>
+
+                        <strong id="todayDuration">
+                            --
+                        </strong>
+
+                        <small id="todayDate">
+                            No record
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sleep-times">
+
+                    <div>
+                        <span>🌙 Sleep Time</span>
+                        <strong id="todaySleepTime">
+                            --
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>☀ Wake Time</span>
+                        <strong id="todayWakeTime">
+                            --
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT: WEEKLY CHART -->
+
+            <div class="card chart-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h3>This Week</h3>
+                        <p>Your sleep duration for the last 7 records</p>
+                    </div>
+
+                    <button class="small-btn">
+                        View Full Sleep Analytics →
+                    </button>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SLEEP HISTORY ================= -->
+
+        <section class="card history-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h3>Sleep History</h3>
+                    <p>View and manage your previous sleep records.</p>
+                </div>
+
+                <div class="filter-buttons">
+
+                    <button class="filter-btn active"
+                            data-filter="all">
+                        All
+                    </button>
+
+                    <button class="filter-btn"
+                            data-filter="week">
+                        This Week
+                    </button>
+
+                    <button class="filter-btn"
+                            data-filter="month">
+                        This Month
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Sleep Time</th>
+                        <th>Wake Time</th>
+                        <th>Duration</th>
+                        <th>Quality</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="sleepTableBody">
+
+                    <tr>
+                        <td colspan="7" class="empty-row">
+                            Loading sleep records...
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= WELLNESS TIP ================= -->
+
+        <section class="tip-card">
+
+            <div class="tip-icon">🌿</div>
+
+            <div>
+
+                <h3>Sleep Wellness Tip</h3>
+
+                <p>
+                    Try to maintain a consistent sleep and wake-up
+                    schedule. A regular routine can help improve
+                    your sleep quality and overall wellbeing.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= ADD / EDIT MODAL ================= -->
+
+<div class="modal-overlay" id="sleepModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="modalTitle">Add Sleep Record</h2>
+                <p>Enter your sleep details below.</p>
+            </div>
+
+            <button id="closeModal">×</button>
+
+        </div>
+
+
+        <form id="sleepForm">
+
+            <input type="hidden"
+                   id="recordId">
+
+
+            <div class="form-group">
+
+                <label for="recordDate">
+                    Sleep Date
+                </label>
+
+                <input type="date"
+                       id="recordDate"
+                       required>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="sleepTime">
+                        Sleep Time
+                    </label>
+
+                    <input type="time"
+                           id="sleepTime"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="wakeTime">
+                        Wake-up Time
+                    </label>
+
+                    <input type="time"
+                           id="wakeTime"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <div class="duration-preview">
+
+                <span>Calculated Sleep Duration</span>
+
+                <strong id="durationPreview">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="quality">
+                    Sleep Quality
+                </label>
+
+                <select id="quality">
+
+                    <option value="">
+                        Select quality
+                    </option>
+
+                    <option value="poor">
+                        Poor
+                    </option>
+
+                    <option value="average">
+                        Average
+                    </option>
+
+                    <option value="good">
+                        Good
+                    </option>
+
+                    <option value="excellent">
+                        Excellent
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="notes">
+                    Notes
+                    <span>(Optional)</span>
+                </label>
+
+                <textarea id="notes"
+                          rows="3"
+                          placeholder="How did you feel after waking up?"></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="reportFile">
+                    Sleep Report
+                    <span>(Optional)</span>
+                </label>
+
+                <input type="text"
+                       id="reportFile"
+                       placeholder="Report file name / reference">
+
+                <small class="input-help">
+                    File upload can be connected separately with the backend.
+                </small>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="cancel-btn"
+                        id="cancelBtn">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+                    Save Record
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Live Server preview JS -->
+<script src="../static/js/sleep_track.js"></script>
+
+<!-- for Flask backend connecting  -->
+<!--
+<script src="{{ url_for('static', filename='js/sleep_tracker.js') }}"></script>
+-->
+
+</body>
+</html>

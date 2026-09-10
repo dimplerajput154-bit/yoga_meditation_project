@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Health Profile | Wellness</title>
+   <!--original flask line-->
+   <!-- <link rel="stylesheet"-->
+          <!--href="{{ url_for('static', filename='css/health_profile.css') }}">-->
+        <link rel="stylesheet" href="../static/css/health_profile.css">  
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="logo-section">
+            <div class="logo-icon">🌿</div>
+
+            <div>
+                <h2>Wellness</h2>
+                <p>Good Health, Better You.</p>
+            </div>
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="#" class="menu-item">
+                <span>⌂</span>
+                <label>Dashboard</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♧</span>
+                <label>Yoga</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>◉</span>
+                <label>Meditation</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>☻</span>
+                <label>Mental Wellness</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>🍲</span>
+                <label>Recipes</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▣</span>
+                <label>Books</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>◷</span>
+                <label>Sleep Tracker</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>☺</span>
+                <label>Mood Tracker</label>
+            </a>
+
+            <!-- ACTIVE -->
+            <a href="#" class="menu-item active">
+                <span>♧</span>
+                <label>Health Profile</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>✚</span>
+                <label>Health & Remedies</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>✦</span>
+                <label>AI Assistant</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♡</span>
+                <label>Favorites</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⇩</span>
+                <label>Downloads</label>
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⚙</span>
+                <label>Settings</label>
+            </a>
+
+        </nav>
+
+
+        <a href="#" class="menu-item logout">
+            <span>↪</span>
+            <label>Logout</label>
+        </a>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="search-container">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search yoga, recipes, books..."
+                >
+
+            </div>
+
+
+            <div class="top-right">
+
+                <button class="notification">
+                    ♧
+                    <span>3</span>
+                </button>
+
+
+                <div class="profile-mini">
+
+                    <div class="avatar">
+                        U
+                    </div>
+
+                    <span>Hi, User</span>
+
+                    <span>⌄</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>Health Profile</h1>
+
+                <p>
+                    Manage your personal health information.
+                </p>
+
+            </div>
+
+
+            <div
+                id="statusPill"
+                class="status-pill">
+                Loading...
+            </div>
+
+        </section>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="messageBox"
+            class="message-box hidden">
+        </div>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <section class="profile-layout">
+
+
+            <!-- LEFT PROFILE CARD -->
+
+            <div class="profile-card">
+
+
+                <!-- TABS -->
+
+                <div class="tabs">
+
+                    <button
+                        class="tab active"
+                        data-section="personal">
+
+                        Personal Info
+
+                    </button>
+
+
+                    <button
+                        class="tab"
+                        data-section="body">
+
+                        Body Stats
+
+                    </button>
+
+
+                    <button
+                        class="tab"
+                        data-section="medical">
+
+                        Medical Info
+
+                    </button>
+
+
+                    <button
+                        class="tab"
+                        data-section="lifestyle">
+
+                        Lifestyle
+
+                    </button>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form id="healthForm">
+
+
+                    <!-- PERSONAL -->
+
+                    <div
+                        class="form-section"
+                        id="personal">
+
+                        <h3>Personal Information</h3>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Age
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="age"
+                                    name="age"
+                                    min="1"
+                                    max="120"
+                                    placeholder="Enter age">
+
+                                <small
+                                    id="ageError"
+                                    class="error">
+                                </small>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Gender
+                                </label>
+
+                                <select
+                                    id="gender"
+                                    name="gender">
+
+                                    <option value="">
+                                        Select gender
+                                    </option>
+
+                                    <option value="male">
+                                        Male
+                                    </option>
+
+                                    <option value="female">
+                                        Female
+                                    </option>
+
+                                    <option value="other">
+                                        Other
+                                    </option>
+
+                                </select>
+
+                                <small
+                                    id="genderError"
+                                    class="error">
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BODY -->
+
+                    <div
+                        class="form-section"
+                        id="body">
+
+                        <h3>Body Statistics</h3>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Height
+                                    <span>(cm)</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="height_cm"
+                                    name="height_cm"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="e.g. 160">
+
+                                <small
+                                    id="height_cmError"
+                                    class="error">
+                                </small>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Weight
+                                    <span>(kg)</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="weight_kg"
+                                    name="weight_kg"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="e.g. 55">
+
+                                <small
+                                    id="weight_kgError"
+                                    class="error">
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LIFESTYLE -->
+
+                    <div
+                        class="form-section"
+                        id="lifestyle">
+
+                        <h3>Lifestyle</h3>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Activity Level
+                                </label>
+
+                                <select
+                                    id="activity_level"
+                                    name="activity_level">
+
+                                    <option value="">
+                                        Select activity level
+                                    </option>
+
+                                    <option value="sedentary">
+                                        Sedentary
+                                    </option>
+
+                                    <option value="light">
+                                        Light
+                                    </option>
+
+                                    <option value="moderate">
+                                        Moderate
+                                    </option>
+
+                                    <option value="active">
+                                        Active
+                                    </option>
+
+                                </select>
+
+                                <small
+                                    id="activity_levelError"
+                                    class="error">
+                                </small>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Diet Preference
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="diet_preference"
+                                    name="diet_preference"
+                                    maxlength="50"
+                                    placeholder="e.g. Vegetarian">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MEDICAL -->
+
+                    <div
+                        class="form-section"
+                        id="medical">
+
+                        <h3>Medical Information</h3>
+
+
+                        <div class="medical-grid">
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Allergies
+                                </label>
+
+                                <textarea
+                                    id="allergies"
+                                    name="allergies"
+                                    placeholder="Enter allergies or None">
+                                </textarea>
+
+                            </div>
+
+
+                            <div class="input-group">
+
+                                <label>
+                                    Existing Conditions
+                                </label>
+
+                                <textarea
+                                    id="existing_conditions"
+                                    name="existing_conditions"
+                                    placeholder="Enter existing conditions or None">
+                                </textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FORM FOOTER -->
+
+                    <div class="form-footer">
+
+                        <span id="lastUpdated">
+                            Not loaded yet
+                        </span>
+
+
+                        <button
+                            type="submit"
+                            class="save-button"
+                            id="saveBtn">
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <aside class="right-column">
+
+
+                <!-- BMI CARD -->
+
+                <div class="card bmi-card">
+
+                    <div class="card-heading">
+
+                        <h3>Your BMI</h3>
+
+                        <span>⚖</span>
+
+                    </div>
+
+
+                    <div
+                        id="bmiValue"
+                        class="bmi-value">
+
+                        --
+
+                    </div>
+
+
+                    <div
+                        id="bmiLabel"
+                        class="bmi-status">
+
+                        Enter height & weight
+
+                    </div>
+
+
+                    <div class="bmi-bar">
+
+                        <div class="bmi-gradient"></div>
+
+                    </div>
+
+
+                    <div class="bmi-labels">
+
+                        <span>Under</span>
+
+                        <span>Normal</span>
+
+                        <span>Over</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BODY STATS -->
+
+                <div class="card body-card">
+
+                    <h3>Your Body Stats</h3>
+
+
+                    <div class="stat">
+
+                        <span>BMI</span>
+
+                        <strong id="sideBmi">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>Body Fat</span>
+
+                        <strong>--</strong>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <span>Muscle Mass</span>
+
+                        <strong>--</strong>
+
+                    </div>
+
+
+                    <p class="card-note">
+
+                        BMI is calculated from the
+                        height and weight entered above.
+
+                    </p>
+
+                </div>
+
+
+                <!-- WELLNESS TIP -->
+
+                <div class="tip-card">
+
+                    <div class="tip-leaf">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <h3>Wellness Tip</h3>
+
+                        <p>
+                            Keep your health information
+                            updated for a better wellness
+                            experience.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </aside>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!--original flask line-->
+<!--<script src="{{ url_for('static', filename='js/health_profile.js') }}">
+</script>-->
+<script src="../static/js/health_profile.js"></script>
+
+</body>
+</html>

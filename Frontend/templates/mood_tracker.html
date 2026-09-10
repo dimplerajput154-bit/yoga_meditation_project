@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mood Tracker | Wellness</title>
+
+    <!-- Flask version -->
+    <!--
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/mood_tracker.css') }}">
+    -->
+
+    <!-- Live Server version -->
+    <link rel="stylesheet" href="../static/css/mood_tracker.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+            <div class="logo-icon">✚</div>
+            <div>
+                <h2>Wellness</h2>
+                <p>AI Wellness</p>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="#" class="menu-item">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>♡</span>
+                Health Profile
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>◷</span>
+                Sleep Tracker
+            </a>
+
+            <a href="#" class="menu-item active">
+                <span>☻</span>
+                Mood Tracker
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>◉</span>
+                Meditation
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-box">
+                <span>?</span>
+
+                <div>
+                    <strong>Need Help?</strong>
+                    <p>We're here for you</p>
+                </div>
+            </div>
+
+            <a href="#" class="logout">
+                <span>⇥</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="page-title">
+
+                <h1>Mood Tracker</h1>
+
+                <p>
+                    Track your mood and understand your emotional wellbeing
+                </p>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="search-box">
+                    <span>⌕</span>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search..."
+                    >
+                </div>
+
+                <div class="notification">
+                    ♢
+                </div>
+
+                <div class="profile">
+                    <div class="profile-avatar">
+                        M
+                    </div>
+
+                    <div>
+                        <strong>Mamata</strong>
+                        <small>Wellness User</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-icon mood-icon">
+                    ☻
+                </div>
+
+                <div>
+                    <p>Today's Mood</p>
+                    <h2 id="todayMood">--</h2>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon stress-icon">
+                    ♡
+                </div>
+
+                <div>
+                    <p>Average Stress</p>
+                    <h2>
+                        <span id="averageStress">--</span>
+                        <small>/ 10</small>
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon record-icon">
+                    ◷
+                </div>
+
+                <div>
+                    <p>Total Records</p>
+                    <h2 id="totalRecords">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon trend-icon">
+                    ↗
+                </div>
+
+                <div>
+                    <p>Most Frequent</p>
+                    <h2 id="dominantMood">--</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ACTION BAR ================= -->
+
+        <section class="action-bar">
+
+            <div>
+                <h2>Mood History</h2>
+                <p>Keep track of how you feel over time</p>
+            </div>
+
+            <button
+                class="add-button"
+                onclick="openMoodModal()"
+            >
+                + Log Mood
+            </button>
+
+        </section>
+
+
+        <!-- ================= MOOD SELECTION ================= -->
+
+        <section class="mood-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>How are you feeling today?</h2>
+                    <p>Select your current mood</p>
+                </div>
+
+            </div>
+
+
+            <div class="mood-options">
+
+                <button
+                    class="mood-option"
+                    data-mood="happy"
+                    onclick="selectMood('happy')"
+                >
+                    <div class="mood-emoji">😊</div>
+                    <span>Happy</span>
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    data-mood="good"
+                    onclick="selectMood('good')"
+                >
+                    <div class="mood-emoji">🙂</div>
+                    <span>Good</span>
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    data-mood="neutral"
+                    onclick="selectMood('neutral')"
+                >
+                    <div class="mood-emoji">😐</div>
+                    <span>Neutral</span>
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    data-mood="stressed"
+                    onclick="selectMood('stressed')"
+                >
+                    <div class="mood-emoji">😣</div>
+                    <span>Stressed</span>
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    data-mood="sad"
+                    onclick="selectMood('sad')"
+                >
+                    <div class="mood-emoji">😔</div>
+                    <span>Sad</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CHARTS ================= -->
+
+        <section class="charts-grid">
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+                        <h2>Mood Trend</h2>
+                        <p>Your mood over the selected period</p>
+                    </div>
+
+                    <select id="moodPeriod"
+                            onchange="loadSummary()">
+
+                        <option value="week">
+                            Last 7 Days
+                        </option>
+
+                        <option value="month">
+                            Last 30 Days
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="moodChart"></canvas>
+                </div>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+                        <h2>Stress Trend</h2>
+                        <p>Your stress level over time</p>
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="stressChart"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HISTORY TABLE ================= -->
+
+        <section class="history-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Recent Mood Records</h2>
+                    <p>Your recently logged moods</p>
+                </div>
+
+                <select id="historyFilter"
+                        onchange="filterHistory()">
+
+                    <option value="all">
+                        All
+                    </option>
+
+                    <option value="happy">
+                        Happy
+                    </option>
+
+                    <option value="good">
+                        Good
+                    </option>
+
+                    <option value="neutral">
+                        Neutral
+                    </option>
+
+                    <option value="stressed">
+                        Stressed
+                    </option>
+
+                    <option value="sad">
+                        Sad
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Mood</th>
+                            <th>Stress</th>
+                            <th>Notes</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="moodTableBody">
+
+                        <tr>
+                            <td colspan="5" class="empty-row">
+                                Loading mood records...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= MOOD MODAL ================= -->
+
+<div
+    class="modal-overlay"
+    id="moodModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2 id="modalTitle">
+                    Log Your Mood
+                </h2>
+
+                <p>
+                    Record how you are feeling today
+                </p>
+            </div>
+
+            <button
+                class="close-button"
+                onclick="closeMoodModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="moodForm">
+
+            <input
+                type="hidden"
+                id="recordId"
+            >
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label for="recordDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="recordDate"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MOOD -->
+
+            <div class="form-group">
+
+                <label>
+                    Mood
+                </label>
+
+                <div class="form-moods">
+
+                    <button
+                        type="button"
+                        class="form-mood"
+                        data-mood="happy"
+                        onclick="selectFormMood('happy')"
+                    >
+                        😊
+                        <span>Happy</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="form-mood"
+                        data-mood="good"
+                        onclick="selectFormMood('good')"
+                    >
+                        🙂
+                        <span>Good</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="form-mood"
+                        data-mood="neutral"
+                        onclick="selectFormMood('neutral')"
+                    >
+                        😐
+                        <span>Neutral</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="form-mood"
+                        data-mood="stressed"
+                        onclick="selectFormMood('stressed')"
+                    >
+                        😣
+                        <span>Stressed</span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="form-mood"
+                        data-mood="sad"
+                        onclick="selectFormMood('sad')"
+                    >
+                        😔
+                        <span>Sad</span>
+                    </button>
+
+                </div>
+
+                <input
+                    type="hidden"
+                    id="mood"
+                    required
+                >
+
+            </div>
+
+
+            <!-- STRESS -->
+
+            <div class="form-group">
+
+                <div class="label-row">
+
+                    <label for="stressLevel">
+                        Stress Level
+                    </label>
+
+                    <strong>
+                        <span id="stressValue">5</span>/10
+                    </strong>
+
+                </div>
+
+                <input
+                    type="range"
+                    id="stressLevel"
+                    min="1"
+                    max="10"
+                    value="5"
+                    oninput="updateStressValue()"
+                >
+
+                <div class="range-labels">
+                    <span>Low</span>
+                    <span>High</span>
+                </div>
+
+            </div>
+
+
+            <!-- NOTES -->
+
+            <div class="form-group">
+
+                <label for="notes">
+                    Notes / Journal
+                </label>
+
+                <textarea
+                    id="notes"
+                    rows="4"
+                    placeholder="Write something about how you feel..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                class="form-error"
+                id="formError"
+            ></div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    onclick="closeMoodModal()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    Save Mood
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- Flask version -->
+<!--
+<script src="{{ url_for('static', filename='js/mood_tracker.js') }}"></script>
+-->
+
+<!-- Live Server version -->
+
+<script src="../static/js/mood_tracker.js"></script>
+
+</body>
+</html>
