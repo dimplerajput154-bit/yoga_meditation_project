@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI Wellness</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head><body><div class="page"><div class="auth-card">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div>
+                <h1>AI Wellness</h1>
+                <span>Healthy Mind. Healthy Life.</span>
+            </div>
+
+        </div>
+
+        <div class="left-content">
+
+            <h2>
+                Take care of your
+                <br>
+                mind & body.
+            </h2>
+
+            <p>
+                Your personal wellness journey starts here.
+                Build healthier habits and create a balanced
+                lifestyle with AI-powered wellness guidance.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-person-praying"></i>
+                    </div>
+                    <span>Personalized Wellness</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-spa"></i>
+                    </div>
+                    <span>Yoga & Meditation</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <span>Healthy Lifestyle</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <span>Track Your Progress</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="tabs">
+
+            <button id="loginTab"
+                    class="tab active"
+                    onclick="showLogin()">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+
+            </button>
+
+            <button id="registerTab"
+                    class="tab"
+                    onclick="showRegister()">
+
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <div id="loginBox" class="form-box">
+
+            <div class="heading">
+
+                <h2>Welcome Back 👋</h2>
+
+                <p>
+                    Login to continue your wellness journey.
+                </p>
+
+            </div>
+
+            <form onsubmit="loginUser(event)">
+
+                <label>Email Address</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <i class="fa-solid fa-eye password-eye"
+                       onclick="togglePassword('loginPassword', this)">
+                    </i>
+
+                </div>
+
+
+                <button class="main-btn" type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <div id="loginMessage" class="message"></div>
+
+            <div class="bottom-text">
+
+                New user?
+
+                <span onclick="showRegister()">
+                    Create Account
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER FORM -->
+
+        <div id="registerBox" class="form-box hidden">
+
+            <div class="heading">
+
+                <h2>Create Account 🌱</h2>
+
+                <p>
+                    Register once and login anytime.
+                </p>
+
+            </div>
+
+
+            <form onsubmit="registerUser(event)">
+
+                <label>Full Name</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <label>Email Address</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                    <i class="fa-solid fa-eye password-eye"
+                       onclick="togglePassword('registerPassword', this)">
+                    </i>
+
+                </div>
+
+
+                <button class="main-btn" type="submit">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <div id="registerMessage" class="message"></div>
+
+
+            <div class="bottom-text">
+
+                Already registered?
+
+                <span onclick="showLogin()">
+                    Login
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div><script src="script.js"></script></body>
+</html>
