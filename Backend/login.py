@@ -1,121 +1,131 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import (
-LoginManager,
-UserMixin,
-login_user,
-current_user,
-logout_user
-)
 from flask_cors import CORS
+from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user
 from werkzeug.security import check_password_hash
 
-#=========================================================
+from Database import get_connection
 
-#Flask Application
 
-#=========================================================
+# =========================================================
+# Flask Application
+# =========================================================
 
 app = Flask(__name__)
 
 CORS(
-app,
-supports_credentials=True
+    app,
+    supports_credentials=True
 )
 
 app.config["SECRET_KEY"] = "wellness_secret_key_12345"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///wellness.db"
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
-
-#=========================================================
-
-#Login Manager
-
-#=========================================================
+# =========================================================
+# Login Manager
+# =========================================================
 
 login_manager = LoginManager()
 
 login_manager.init_app(app)
 
-#=========================================================
 
-#User Model
+# =========================================================
+# User Class
+# =========================================================
 
-#=========================================================
+class User(UserMixin):
 
-class User(UserMixin, db.Model):
+    def _init_(self, user_id, full_name, email):
+        self.user_id = user_id
+        self.full_name = full_name
+        self.email = email
 
- __tablename__ = "users"
+    def get_id(self):
+        return str(self.user_id)
 
- id = db.Column(
-    db.Integer,
-    primary_key=True
- )
 
- name = db.Column(
-    db.String(100),
-    nullable=False
- )
-
- email = db.Column(
-    db.String(120),
-    unique=True,
-    nullable=False
- )
-
- password = db.Column(
-    db.String(200),
-    nullable=False
- )
-
-#=========================================================
-
-#Load User
-
-#=========================================================
+# =========================================================
+# Load User
+# =========================================================
 
 @login_manager.user_loader
 def load_user(user_id):
 
- return db.session.get(
-    User,
-    int(user_id)
-)
+    conn = None
+    cursor = None
 
-#=========================================================
+    try:
 
-#Home / Test
+        conn = get_connection()
 
-#=========================================================
+        if conn is None:
+            return None
 
-@app.route("/")
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute(
+            """
+            SELECT user_id, full_name, email
+            FROM users
+            WHERE user_id = %s
+            """,
+            (user_id,)
+        )
+
+        user = cursor.fetchone()
+
+        if user:
+
+            return User(
+                user["user_id"],
+                user["full_name"],
+                user["email"]
+            )
+
+        return None
+
+    except Exception as e:
+
+        print("Load User Error:", e)
+
+        return None
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
+
+
+# =========================================================
+# Home / Test
+# =========================================================
+
+@app.route("/", methods=["GET"])
 def home():
 
- return jsonify({
+    return jsonify({
+        "status": "success",
+        "message": "AI Wellness Login Server is running.",
+        "login": "/login",
+        "check_login": "/check-login",
+        "logout": "/logout"
+    })
 
-    "status": "success",
 
-    "message": "Login Server is running.",
-
-    "login": "/login",
-
-    "logout": "/logout"
-
-})
-
-#=========================================================
-
-#Login
-
-#=========================================================
+# =========================================================
+# Login
+# =========================================================
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-  if request.method == "GET":
+
+    # GET request for testing
+
+    if request.method == "GET":
+
         return jsonify({
             "status": "success",
             "message": "Login API is working.",
@@ -126,197 +136,240 @@ def login():
             ]
         })
 
-  data = request.get_json()
 
-  if not data:
+    # Get JSON data
 
-    return jsonify({
+    data = request.get_json()
 
-        "status": "error",
+    if not data:
 
-        "message": "JSON data is required."
-
-    }), 400
-
-
-  email = data.get("email")
-
-  password = data.get("password")
+        return jsonify({
+            "status": "error",
+            "message": "JSON data is required."
+        }), 400
 
 
-# Validate input
-
-  if not email or not password:
-
-    return jsonify({
-
-        "status": "error",
-
-        "message": "Email and password are required."
-
-    }), 400
+    email = data.get("email")
+    password = data.get("password")
 
 
-# Find user
+    # Validate input
 
-  user = User.query.filter_by(
-    email=email
-  ).first()
+    if not email or not password:
 
-
- # User not found
-  if user is None:
-
-    return jsonify({
-
-        "status": "error",
-
-        "message": "User not found. Please register first."
-
-    }), 404
+        return jsonify({
+            "status": "error",
+            "message": "Email and password are required."
+        }), 400
 
 
-# Check password
+    conn = None
+    cursor = None
 
-  if not check_password_hash(
-    user.password,
-    password
-):
+    try:
 
-    return jsonify({
+        # Connect to existing ai_wellness_db
 
-        "status": "error",
+        conn = get_connection()
 
-        "message": "Invalid email or password."
+        if conn is None:
 
-    }), 401
-
-
- # Create login session
-
-  login_user(user)
+            return jsonify({
+                "status": "error",
+                "message": "Database connection failed."
+            }), 500
 
 
-  return jsonify({
+        cursor = conn.cursor(dictionary=True)
 
-    "status": "success",
 
-    "message": "Login successful.",
+        # Find user
 
-    "user": {
+        cursor.execute(
+            """
+            SELECT user_id, full_name, email, password_hash
+            FROM users
+            WHERE email = %s
+            """,
+            (email,)
+        )
 
-        "id": user.id,
+        user = cursor.fetchone()
 
-        "name": user.name,
 
-        "email": user.email
+        # User not found
 
-    },
+        if user is None:
 
-    "next": "http://127.0.0.1:5000/api/dashboard-data"
+            return jsonify({
+                "status": "error",
+                "message": "User not found. Please register first."
+            }), 404
 
-})
 
-#=========================================================
+        # Check password
 
-#Check Login
+        if not check_password_hash(
+            user["password_hash"],
+            password
+        ):
 
-#=========================================================
+            return jsonify({
+                "status": "error",
+                "message": "Invalid email or password."
+            }), 401
+
+
+        # Create Flask login session
+
+        logged_user = User(
+            user["user_id"],
+            user["full_name"],
+            user["email"]
+        )
+
+        login_user(logged_user)
+
+
+        return jsonify({
+
+            "status": "success",
+
+            "message": "Login successful.",
+
+            "user": {
+
+                "id": user["user_id"],
+
+                "name": user["full_name"],
+
+                "email": user["email"]
+
+            }
+
+        })
+
+
+    except Exception as e:
+
+        print("Login Error:", e)
+
+        return jsonify({
+            "status": "error",
+            "message": "Something went wrong during login."
+        }), 500
+
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
+
+
+# =========================================================
+# Check Login
+# =========================================================
 
 @app.route("/check-login", methods=["GET"])
 def check_login():
 
- if current_user.is_authenticated:
+    if current_user.is_authenticated:
+
+        return jsonify({
+
+            "status": "success",
+
+            "logged_in": True,
+
+            "user": {
+
+                "id": current_user.user_id,
+
+                "name": current_user.full_name,
+
+                "email": current_user.email
+
+            }
+
+        })
+
 
     return jsonify({
 
         "status": "success",
 
-        "logged_in": True,
+        "logged_in": False,
 
-        "user": {
-
-            "id": current_user.id,
-
-            "name": current_user.name,
-
-            "email": current_user.email
-
-        }
+        "message": "User is not logged in."
 
     })
 
 
- return jsonify({
-
-    "status": "success",
-
-    "logged_in": False,
-
-    "message": "User is not logged in."
-
-})
-
-#=========================================================
-
-#Logout
-
-#=========================================================
+# =========================================================
+# Logout
+# =========================================================
 
 @app.route("/logout", methods=["GET", "POST"])
 def logout():
 
- if current_user.is_authenticated:
+    if current_user.is_authenticated:
 
-    logout_user()
+        logout_user()
+
+        return jsonify({
+
+            "status": "success",
+
+            "message": "Logout successful."
+
+        })
+
 
     return jsonify({
 
         "status": "success",
 
-        "message": "Logout successful."
+        "message": "No active login session."
 
     })
 
 
- return jsonify({
+# =========================================================
+# Run Application
+# =========================================================
 
-    "status": "success",
+if __name__ == "__main__":
 
-    "message": "No active login session."
+    print("=" * 60)
 
-})
+    print("          AI WELLNESS LOGIN SERVER")
 
-#=========================================================
+    print("=" * 60)
 
-#Run Application
+    print("Server:")
+    print("http://127.0.0.1:5001")
 
-#=========================================================
+    print()
 
-if __name__ == "main":
+    print("Login:")
+    print("http://127.0.0.1:5001/login")
 
- with app.app_context():
+    print()
 
-    db.create_all()
+    print("Check Login:")
+    print("http://127.0.0.1:5001/check-login")
 
+    print()
 
-print("=" * 55)
+    print("Logout:")
+    print("http://127.0.0.1:5001/logout")
 
-print("             AI WELLNESS LOGIN")
+    print("=" * 60)
 
-print("=" * 55)
-
-print("Login Server: http://127.0.0.1:5001")
-
-print("Login API:    http://127.0.0.1:5001/login")
-
-print("=" * 55)
-
-
-app.run(
-
-    debug=True,
-
-    port=5001
-
-)
+    app.run(
+        debug=True,
+        port=5001
+    )
