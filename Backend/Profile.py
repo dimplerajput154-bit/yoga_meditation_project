@@ -1,251 +1,369 @@
-import re
-import mysql.connector
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from Database import get_connection
 
 
-def validate_user_id(user_id):
-    if user_id is None:
-        return False, "User ID is required"
+# =========================================================
+# Flask Application
+# =========================================================
 
-    try:
-        user_id = int(user_id)
-    except (ValueError, TypeError):
-        return False, "Invalid user ID"
+app = Flask(_name_)
 
-    if user_id <= 0:
-        return False, "User ID must be greater than 0"
-
-    return True, ""
+CORS(app)
 
 
-def validate_name(full_name):
-    if not full_name or not full_name.strip():
-        return False, "Full name is required"
+# =========================================================
+# Home / Test
+# =========================================================
 
-    full_name = full_name.strip()
+@app.route("/", methods=["GET"])
+def home():
 
-    if len(full_name) < 2:
-        return False, "Name must contain at least 2 characters"
-
-    if len(full_name) > 100:
-        return False, "Name is too long"
-
-    if not re.fullmatch(r"[A-Za-z ]+", full_name):
-        return False, "Name can contain only letters and spaces"
-
-    return True, ""
+    return jsonify({
+        "status": "success",
+        "message": "AI Wellness Profile Server is running.",
+        "get_profile": "/api/profile/<user_id>",
+        "update_profile": "/api/profile/<user_id>"
+    })
 
 
-def validate_email(email):
-    if not email or not email.strip():
-        return False, "Email is required"
+# =========================================================
+# Get Profile
+# =========================================================
 
-    email = email.strip()
-
-    pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
-
-    if not re.fullmatch(pattern, email):
-        return False, "Enter a valid email address"
-
-    return True, ""
-
-
+@app.route(
+    "/api/profile/<int:user_id>",
+    methods=["GET"]
+)
 def get_profile(user_id):
-
-    # Validate user ID
-    valid, message = validate_user_id(user_id)
-
-    if not valid:
-        return {
-            "success": False,
-            "message": message,
-            "profile": None
-        }
 
     conn = None
     cursor = None
 
     try:
+
         conn = get_connection()
 
         if conn is None:
-            return {
-                "success": False,
-                "message": "Database connection failed",
-                "profile": None
-            }
+
+            return jsonify({
+                "status": "error",
+                "message": "Database connection failed."
+            }), 500
+
 
         cursor = conn.cursor(dictionary=True)
 
+
         query = """
-            SELECT user_id,
-                   full_name,
-                   email,
-                   role,
-                   profile_image,
-                   is_active
+            SELECT
+                user_id,
+                full_name,
+                email,
+                role,
+                profile_image,
+                is_active
             FROM users
             WHERE user_id = %s
-            LIMIT 1
         """
 
-        cursor.execute(query, (int(user_id),))
 
-        profile = cursor.fetchone()
+        cursor.execute(
+            query,
+            (user_id,)
+        )
 
-        if profile is None:
-            return {
-                "success": False,
-                "message": "Profile not found",
-                "profile": None
+
+        user = cursor.fetchone()
+
+
+        if user is None:
+
+            return jsonify({
+                "status": "error",
+                "message": "User not found."
+            }), 404
+
+
+        return jsonify({
+
+            "status": "success",
+
+            "message": "Profile loaded successfully.",
+
+            "profile": {
+
+                "user_id": user["user_id"],
+
+                "full_name": user["full_name"],
+
+                "email": user["email"],
+
+                "role": user["role"],
+
+                "profile_image": user["profile_image"],
+
+                "is_active": user["is_active"]
+
             }
 
-        return {
-            "success": True,
-            "message": "Profile fetched successfully",
-            "profile": profile
-        }
+        })
 
-    except mysql.connector.Error:
-        return {
-            "success": False,
-            "message": "Failed to fetch profile",
-            "profile": None
-        }
+
+    except Exception as e:
+
+        print("Profile Error:", e)
+
+        return jsonify({
+
+            "status": "error",
+
+            "message": "Unable to load profile.",
+
+            "error": str(e)
+
+        }), 500
+
 
     finally:
+
         if cursor:
+
             cursor.close()
 
         if conn:
+
             conn.close()
 
 
-def update_profile(
-    user_id,
-    full_name,
-    email,
-    profile_image=None
-):
+# =========================================================
+# Update Profile
+# =========================================================
 
-    # Validate user ID
-    valid, message = validate_user_id(user_id)
-
-    if not valid:
-        return {
-            "success": False,
-            "message": message
-        }
-
-    # Validate name
-    valid, message = validate_name(full_name)
-
-    if not valid:
-        return {
-            "success": False,
-            "message": message
-        }
-
-    # Validate email
-    valid, message = validate_email(email)
-
-    if not valid:
-        return {
-            "success": False,
-            "message": message
-        }
-
-    full_name = full_name.strip()
-    email = email.strip()
+@app.route(
+    "/api/profile/<int:user_id>",
+    methods=["PUT"]
+)
+def update_profile(user_id):
 
     conn = None
     cursor = None
 
     try:
+
+        data = request.get_json()
+
+
+        if not data:
+
+            return jsonify({
+                "status": "error",
+                "message": "JSON data is required."
+            }), 400
+
+
+        full_name = data.get("full_name")
+        email = data.get("email")
+        profile_image = data.get("profile_image")
+
+
+        # Validate Name
+
+        if not full_name:
+
+            return jsonify({
+                "status": "error",
+                "message": "Full name is required."
+            }), 400
+
+
+        # Validate Email
+
+        if not email:
+
+            return jsonify({
+                "status": "error",
+                "message": "Email is required."
+            }), 400
+
+
         conn = get_connection()
 
+
         if conn is None:
-            return {
-                "success": False,
-                "message": "Database connection failed"
-            }
 
-        cursor = conn.cursor()
+            return jsonify({
+                "status": "error",
+                "message": "Database connection failed."
+            }), 500
 
-        # Check whether user exists
-        user_query = """
+
+        cursor = conn.cursor(dictionary=True)
+
+
+        # Check User
+
+        cursor.execute(
+            """
             SELECT user_id
             FROM users
             WHERE user_id = %s
-            LIMIT 1
-        """
+            """,
+            (user_id,)
+        )
 
-        cursor.execute(user_query, (int(user_id),))
 
-        if cursor.fetchone() is None:
-            return {
-                "success": False,
-                "message": "Profile not found"
-            }
+        user = cursor.fetchone()
 
-        # Check whether email belongs to another user
-        email_query = """
+
+        if user is None:
+
+            return jsonify({
+                "status": "error",
+                "message": "User not found."
+            }), 404
+
+
+        # Check Duplicate Email
+
+        cursor.execute(
+            """
             SELECT user_id
             FROM users
             WHERE email = %s
-              AND user_id != %s
-            LIMIT 1
-        """
-
-        cursor.execute(
-            email_query,
-            (email, int(user_id))
+            AND user_id != %s
+            """,
+            (email, user_id)
         )
 
-        if cursor.fetchone():
-            return {
-                "success": False,
-                "message": "Email is already registered"
-            }
 
-        # Update profile
-        update_query = """
+        existing_user = cursor.fetchone()
+
+
+        if existing_user:
+
+            return jsonify({
+                "status": "error",
+                "message": "Email already exists."
+            }), 400
+
+
+        # Update Profile
+
+        query = """
             UPDATE users
-            SET full_name = %s,
+            SET
+                full_name = %s,
                 email = %s,
                 profile_image = %s
             WHERE user_id = %s
         """
 
+
         cursor.execute(
-            update_query,
+            query,
             (
                 full_name,
                 email,
                 profile_image,
-                int(user_id)
+                user_id
             )
         )
 
+
         conn.commit()
 
-        return {
-            "success": True,
-            "message": "Profile updated successfully"
-        }
 
-    except mysql.connector.Error:
+        return jsonify({
+
+            "status": "success",
+
+            "message": "Profile updated successfully.",
+
+            "profile": {
+
+                "user_id": user_id,
+
+                "full_name": full_name,
+
+                "email": email,
+
+                "profile_image": profile_image
+
+            }
+
+        })
+
+
+    except Exception as e:
+
         if conn:
+
             conn.rollback()
 
-        return {
-            "success": False,
-            "message": "Profile update failed"
-        }
+
+        print("Profile Update Error:", e)
+
+
+        return jsonify({
+
+            "status": "error",
+
+            "message": "Unable to update profile.",
+
+            "error": str(e)
+
+        }), 500
+
 
     finally:
+
         if cursor:
+
             cursor.close()
 
         if conn:
+
             conn.close()
+
+
+# =========================================================
+# Run Application
+# =========================================================
+
+if __name__ == "__main__":
+
+    print("=" * 60)
+
+    print("             AI WELLNESS PROFILE")
+
+    print("=" * 60)
+
+    print("Database: ai_wellness_db")
+
+    print("Profile Server:")
+    print("http://127.0.0.1:5002")
+
+    print()
+
+    print("Test:")
+    print("http://127.0.0.1:5002/")
+
+    print()
+
+    print("Get Profile:")
+    print("http://127.0.0.1:5002/api/profile/1")
+
+    print()
+
+    print("Update Profile:")
+    print("PUT http://127.0.0.1:5002/api/profile/1")
+
+    print("=" * 60)
+
+
+    app.run(
+        debug=True,
+        port=5002
+    )
