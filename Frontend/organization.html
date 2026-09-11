@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wellness - Organizations</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Our CSS -->
+    <link
+        rel="stylesheet"
+        href="organisation.css">
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
+    <div class="container">
+
+        <!-- Website Logo -->
+        <a class="navbar-brand fw-bold text-success" href="/">
+            <i class="bi bi-heart-pulse-fill me-2"></i>
+            Wellness
+        </a>
+
+
+        <!-- Mobile Menu Button -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#discover">
+                        Organizations
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#discussions">
+                        Discussions
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <button
+                        class="btn btn-success px-4"
+                        id="openCreateOrganisationButton"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#createOrganisationModal">
+
+                        <i class="bi bi-plus-circle me-1"></i>
+
+                        Create Organization
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero-section py-5">
+
+    <div class="container py-5">
+
+        <div class="row align-items-center">
+
+            <!-- Hero Text -->
+            <div class="col-lg-7">
+
+                <span class="badge bg-success-subtle text-success px-3 py-2 mb-3">
+
+                    Wellness Community
+
+                </span>
+
+
+                <h1 class="display-5 fw-bold">
+
+                    Discover Communities
+                    That Inspire You
+
+                </h1>
+
+
+                <p class="lead text-muted mt-3">
+
+                    Explore wellness organizations, join communities,
+                    share ideas and connect with people who have
+                    similar interests.
+
+                </p>
+
+
+                <a
+                    href="#discover"
+                    class="btn btn-success btn-lg px-4 mt-2">
+
+                    <i class="bi bi-compass me-2"></i>
+
+                    Explore Organizations
+
+                </a>
+
+            </div>
+
+
+            <!-- Hero Icon -->
+            <div class="col-lg-5 text-center mt-5 mt-lg-0">
+
+                <div class="hero-icon">
+
+                    <i class="bi bi-people-fill"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DISCOVER ORGANIZATIONS
+========================================================= -->
+
+<section id="discover" class="py-5">
+
+    <div class="container">
+
+        <!-- Heading + Search -->
+        <div
+            class="d-flex flex-column flex-md-row
+                   justify-content-between
+                   align-items-md-center mb-4">
+
+            <div>
+
+                <h2 class="fw-bold mb-1">
+
+                    Discover Organizations
+
+                </h2>
+
+                <p class="text-muted mb-0">
+
+                    Find communities related to your wellness interests.
+
+                </p>
+
+            </div>
+
+
+            <!-- Search -->
+            <div class="search-box mt-3 mt-md-0">
+
+                <div class="input-group">
+
+                    <span class="input-group-text bg-white">
+
+                        <i class="bi bi-search"></i>
+
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="Search organizations...">
+
+
+                    <button
+                        class="btn btn-success"
+                        id="searchBtn">
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             CATEGORY FILTERS
+        ====================================================== -->
+
+        <div class="mb-4 d-flex flex-wrap gap-2">
+
+            <button
+                class="btn btn-outline-success category-btn active"
+                data-category="all">
+
+                All
+
+            </button>
+
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Yoga">
+
+                Yoga
+
+            </button>
+
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Meditation">
+
+                Meditation
+
+            </button>
+
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Spirituality">
+
+                Spirituality
+
+            </button>
+
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Fitness">
+
+                Fitness
+
+            </button>
+
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Mental Wellness">
+
+                Mental Wellness
+
+            </button>
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Ayurveda">
+
+                Ayurveda
+
+            </button>
+
+            <button
+                class="btn btn-outline-success category-btn"
+                data-category="Lifestyle">
+
+                Lifestyle
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             LOADING
+        ====================================================== -->
+
+        <div
+            id="loading"
+            class="text-center py-5">
+
+            <div
+                class="spinner-border text-success"
+                role="status">
+
+            </div>
+
+            <p class="text-muted mt-2">
+
+                Loading organizations...
+
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             ORGANIZATION CARDS
+
+             JavaScript will insert cards here.
+        ====================================================== -->
+
+        <div
+            id="organizationContainer"
+            class="row g-4">
+
+        </div>
+
+
+
+        <!-- =====================================================
+             NO RESULTS
+        ====================================================== -->
+
+        <div
+            id="noResults"
+            class="text-center py-5 d-none">
+
+            <i class="bi bi-search display-4 text-muted"></i>
+
+            <h5 class="mt-3">
+
+                No organizations found
+
+            </h5>
+
+            <p class="text-muted">
+
+                Try another search or category.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DISCUSSIONS SECTION
+========================================================= -->
+
+<section
+    id="discussions"
+    class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="mb-4">
+
+            <h2 class="fw-bold">
+
+                Community Discussions
+
+            </h2>
+
+            <p class="text-muted">
+
+                Join conversations and share your thoughts
+                with the community.
+
+            </p>
+
+        </div>
+
+
+        <!-- JavaScript will load discussions here -->
+
+        <div
+            id="discussionContainer"
+            class="row g-4">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ORGANIZATION DETAILS MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="organizationModal"
+    tabindex="-1">
+
+    <div
+        class="modal-dialog modal-lg modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+
+            <!-- Modal Header -->
+
+            <div class="modal-header">
+
+                <h5
+                    class="modal-title"
+                    id="organizationModalTitle">
+
+                    Organization Details
+
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Modal Body -->
+
+            <div class="modal-body">
+
+
+                <!-- Cover Image -->
+
+                <div
+                    id="organizationCover"
+                    class="organization-cover mb-4">
+
+                </div>
+
+
+
+                <!-- Logo + Name -->
+
+                <div
+                    class="d-flex align-items-center gap-3 mb-3">
+
+
+                    <!-- Logo -->
+
+                    <div
+                        id="organizationLogo"
+                        class="organization-logo">
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+
+                    <!-- Name -->
+
+                    <div>
+
+                        <h3
+                            id="detailName"
+                            class="mb-1">
+
+                        </h3>
+
+
+                        <span
+                            id="detailCategory"
+                            class="badge bg-success-subtle text-success">
+
+                        </span>
+
+
+                        <span
+                            id="detailPrivacy"
+                            class="badge bg-secondary-subtle text-secondary">
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Description -->
+
+                <p
+                    id="detailDescription"
+                    class="text-muted">
+
+                </p>
+
+
+
+                <!-- Organization Information -->
+
+                <div class="row g-3 mb-4">
+
+
+                    <!-- Members -->
+
+                    <div class="col-md-4">
+
+                        <div class="info-box">
+
+                            <i class="bi bi-people"></i>
+
+                            <strong id="detailMembers">
+
+                                0
+
+                            </strong>
+
+                            <small>
+
+                                Members
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Discussions -->
+
+                    <div class="col-md-4">
+
+                        <div class="info-box">
+
+                            <i class="bi bi-chat-dots"></i>
+
+                            <strong id="detailDiscussions">
+
+                                0
+
+                            </strong>
+
+                            <small>
+
+                                Discussions
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Created Date -->
+
+                    <div class="col-md-4">
+
+                        <div class="info-box">
+
+                            <i class="bi bi-calendar3"></i>
+
+                            <strong id="detailCreated">
+
+                                -
+
+                            </strong>
+
+                            <small>
+
+                                Created
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Join / Discussion Buttons -->
+
+                <div class="d-flex gap-2 mb-4">
+
+
+                    <button
+                        id="joinLeaveBtn"
+                        class="btn btn-success">
+
+                        <i class="bi bi-person-plus me-1"></i>
+
+                        Join Organization
+
+                    </button>
+
+
+                    <button
+                        id="viewDiscussionBtn"
+                        class="btn btn-outline-success">
+
+                        <i class="bi bi-chat-dots me-1"></i>
+
+                        View Discussions
+
+                    </button>
+
+                </div>
+
+
+
+                <hr>
+
+
+
+                <!-- Members -->
+
+                <div class="profile-section-heading">
+                    <div>
+                        <span class="eyebrow">Inside the community</span>
+                        <h5 class="fw-bold mb-0">Members</h5>
+                    </div>
+                    <span class="profile-section-note">People growing together</span>
+                </div>
+
+
+                <div id="memberContainer">
+
+                    <p class="text-muted">
+
+                        Loading members...
+
+                    </p>
+
+                </div>
+
+                <div class="profile-section-heading course-heading">
+                    <div>
+                        <span class="eyebrow">Learn together</span>
+                        <h5 class="fw-bold mb-0">Community courses</h5>
+                    </div>
+                    <span class="profile-section-note">Guided by this organization</span>
+                </div>
+
+                <div id="courseContainer" class="course-grid"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     CREATE ORGANIZATION MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="createOrganisationModal"
+    tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+
+            <form id="createOrganisationForm">
+
+
+                <!-- Header -->
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+
+                        Create Organization
+
+                    </h5>
+
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- Body -->
+
+                <div class="modal-body">
+
+
+                    <!-- Message -->
+
+                    <div id="createMessage"></div>
+
+
+
+                    <!-- Organization Name -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Organization Name
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="orgName"
+                            class="form-control"
+                            minlength="3"
+                            maxlength="120"
+                            required
+                            placeholder="Enter organization name">
+
+                    </div>
+
+
+
+                    <!-- Category -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Category
+
+                        </label>
+
+
+                        <select
+                            id="orgCategory"
+                            class="form-select"
+                            required>
+
+                            <option value="">
+
+                                Select category
+
+                            </option>
+
+                            <option value="Yoga">
+
+                                Yoga
+
+                            </option>
+
+                            <option value="Meditation">
+
+                                Meditation
+
+                            </option>
+
+                            <option value="Spirituality">
+
+                                Spirituality
+
+                            </option>
+
+                            <option value="Fitness">
+
+                                Fitness
+
+                            </option>
+
+                            <option value="Mental Wellness">
+
+                                Mental Wellness
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Privacy -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Privacy
+
+                        </label>
+
+
+                        <select
+                            id="orgPrivacy"
+                            class="form-select"
+                            required>
+
+                            <option value="public">
+
+                                Public
+
+                            </option>
+
+                            <option value="private">
+
+                                Private
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Description -->
+
+                    <div class="mb-3">
+
+                        <label
+                            class="form-label">
+
+                            Description
+
+                        </label>
+
+
+                        <textarea
+                            id="orgDescription"
+                            class="form-control"
+                            rows="4"
+                            maxlength="1000"
+                            placeholder="Describe your organization..."></textarea>
+
+                    </div>
+
+
+
+                    <!-- Logo upload -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="orgLogo">
+                            Organization Logo
+                            <span class="text-muted">(optional)</span>
+                        </label>
+
+                        <label class="upload-zone" for="orgLogo">
+                            <i class="bi bi-cloud-arrow-up upload-zone-icon"></i>
+                            <span class="upload-zone-title">Upload organization logo</span>
+                            <span class="upload-zone-help">Click to choose an image or drag it here</span>
+                            <input
+                                type="file"
+                                id="orgLogo"
+                                class="visually-hidden"
+                                accept="image/png,image/jpeg,image/jpg,image/webp">
+                        </label>
+                        <div id="orgLogoPreview" class="upload-preview d-none"></div>
+
+                    </div>
+
+
+                    <!-- Cover upload -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label" for="orgCover">
+                            Organization Cover Image
+                            <span class="text-muted">(optional)</span>
+                        </label>
+
+                        <label class="upload-zone upload-zone-cover" for="orgCover">
+                            <i class="bi bi-image upload-zone-icon"></i>
+                            <span class="upload-zone-title">Upload cover image</span>
+                            <span class="upload-zone-help">Click to choose an image or drag it here</span>
+                            <input
+                                type="file"
+                                id="orgCover"
+                                class="visually-hidden"
+                                accept="image/png,image/jpeg,image/jpg,image/webp">
+                        </label>
+                        <div id="orgCoverPreview" class="upload-preview d-none"></div>
+
+                    </div>
+
+
+
+                    <!-- User ID -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            User ID
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="createdBy"
+                            class="form-control"
+                            value="1"
+                            min="1"
+                            required>
+
+
+                        <small class="text-muted">
+
+                            Development/testing user ID.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Footer -->
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        <i class="bi bi-plus-circle me-1"></i>
+
+                        Create Organization
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     DISCUSSION MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="discussionModal"
+    tabindex="-1">
+
+    <div
+        class="modal-dialog modal-lg modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+
+            <!-- Header -->
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    Organization Discussions
+
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Body -->
+
+            <div class="modal-body">
+
+
+                <!-- Discussion List -->
+
+                <div id="discussionList">
+
+                    <p class="text-muted">
+
+                        Loading discussions...
+
+                    </p>
+
+                </div>
+
+
+
+                <hr>
+
+
+
+                <!-- Create Discussion -->
+
+                <h5 class="mb-3">
+
+                    Start a Discussion
+
+                </h5>
+
+
+                <form id="createDiscussionForm">
+
+
+                    <!-- Organization ID -->
+
+                    <input
+                        type="hidden"
+                        id="discussionOrgId">
+
+
+
+                    <!-- Title -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Title
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="discussionTitle"
+                            class="form-control"
+                            maxlength="150"
+                            required
+                            placeholder="Discussion title">
+
+                    </div>
+
+
+
+                    <!-- Content -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Content
+
+                        </label>
+
+
+                        <textarea
+                            id="discussionContent"
+                            class="form-control"
+                            rows="4"
+                            maxlength="2000"
+                            required
+                            placeholder="Write something..."></textarea>
+
+                    </div>
+
+
+
+                    <!-- User ID -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            User ID
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="discussionUserId"
+                            class="form-control"
+                            value="1"
+                            min="1"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        <i class="bi bi-send me-1"></i>
+
+                        Post Discussion
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     TOAST MESSAGE
+========================================================= -->
+
+<div
+    class="toast-container position-fixed bottom-0 end-0 p-3">
+
+
+    <div
+        id="appToast"
+        class="toast"
+        role="alert">
+
+
+        <div class="toast-header">
+
+            <strong class="me-auto">
+
+                Wellness
+
+            </strong>
+
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="toast">
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="toastMessage"
+            class="toast-body">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     BOOTSTRAP JAVASCRIPT
+========================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+
+<!-- =========================================================
+     OUR JAVASCRIPT
+========================================================= -->
+
+<script
+    src="organisation.js">
+</script>
+
+
+</body>
+
+</html>

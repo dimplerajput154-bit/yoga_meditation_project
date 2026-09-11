@@ -1,0 +1,485 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f8f5;
+    color: #24352b;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    width: 250px;
+    background: #ffffff;
+    padding: 25px 15px;
+    border-right: 1px solid #e1e8e3;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2f7d4a;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.menu {
+    border: none;
+    background: transparent;
+    text-align: left;
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #53635a;
+}
+
+.menu:hover,
+.menu.active {
+    background: #e9f5ed;
+    color: #267542;
+}
+
+.logout {
+    margin-top: auto;
+    border: none;
+    background: #fff0f0;
+    color: #c23b3b;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/* Main */
+
+.main-content {
+    flex: 1;
+    padding: 35px;
+}
+
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.header p {
+    color: #718078;
+}
+
+.profile-icon {
+    width: 48px;
+    height: 48px;
+    background: #e6f3ea;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+
+/* Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}
+
+.card-icon {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #718078;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.card h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.card p {
+    color: #7c8981;
+    font-size: 13px;
+}
+
+
+/* Progress */
+
+.progress-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.progress-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}
+
+.progress-card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.step-number {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #e8eee9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar div {
+    height: 100%;
+    width: 0%;
+    background: #4b9b62;
+    border-radius: 10px;
+    transition: width 0.4s;
+}
+
+
+/* Tasks */
+
+.tasks-section {
+    margin-top: 25px;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.section-title h2 {
+    font-size: 20px;
+}
+
+.section-title span {
+    color: #6c7b72;
+    font-size: 14px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #edf1ee;
+}
+
+.task:last-child {
+    border-bottom: none;
+}
+
+.task input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.task.completed span {
+    text-decoration: line-through;
+    color: #8b978f;
+}
+
+.loading {
+    color: #777;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar {
+        width: 210px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .cards,
+    .progress-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Wellness dashboard visual system */
+:root {
+    --dashboard-green: #174f3c;
+    --dashboard-green-light: #e6f1e8;
+    --dashboard-accent: #4f8d4d;
+    --dashboard-ink: #1d2922;
+    --dashboard-muted: #738079;
+    --dashboard-bg: #fbfaf6;
+}
+
+body {
+    background: var(--dashboard-bg);
+    color: var(--dashboard-ink);
+    font-family: "DM Sans", "Segoe UI", sans-serif;
+}
+
+.dashboard {
+    background: var(--dashboard-bg);
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    padding: 22px 14px 16px;
+    border: 0;
+    background: var(--dashboard-green);
+    color: #fff;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 10px 28px;
+    padding: 0;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.logo small {
+    display: block;
+    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 0.56rem;
+    font-weight: 400;
+}
+
+.logo-mark {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.17);
+    color: #c9e5c5;
+}
+
+nav {
+    gap: 3px;
+}
+
+.menu,
+.logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.75rem;
+}
+
+.menu i,
+.logout i {
+    width: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+}
+
+.menu:hover,
+.menu.active {
+    background: #4f9163;
+    color: #fff;
+}
+
+.logout {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.86);
+    text-align: left;
+}
+
+.main-content {
+    max-width: 1480px;
+    padding: 28px 30px 48px;
+}
+
+.header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eceee8;
+}
+
+.header h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.header p {
+    margin-top: 4px;
+    font-size: 0.78rem;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--dashboard-green-light);
+    color: var(--dashboard-green);
+    font-size: 1rem;
+}
+
+.cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.card,
+.progress-card,
+.tasks-section {
+    border: 1px solid #edf0eb;
+    border-radius: 9px;
+    box-shadow: 0 5px 18px rgba(35, 61, 42, 0.05);
+}
+
+.card {
+    padding: 18px;
+}
+
+.card-icon {
+    margin-bottom: 11px;
+    color: var(--dashboard-accent);
+    font-size: 1rem;
+}
+
+.card h3 {
+    color: var(--dashboard-ink);
+    font-size: 0.78rem;
+}
+
+.card h2 {
+    font-size: 1.35rem;
+}
+
+.progress-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.progress-card {
+    padding: 18px;
+}
+
+.progress-card h2 {
+    color: var(--dashboard-ink);
+    font-size: 0.9rem;
+}
+
+.progress-bar div {
+    background: var(--dashboard-accent);
+}
+
+.tasks-section {
+    margin-top: 18px;
+    padding: 20px;
+}
+
+.section-title h2 {
+    font-size: 1rem;
+}
+
+.task {
+    padding: 12px 4px;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 1000px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        min-height: auto;
+    }
+
+    .main-content {
+        padding: 20px 16px 32px;
+    }
+}

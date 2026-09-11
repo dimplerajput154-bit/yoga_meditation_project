@@ -1,0 +1,316 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Wellness</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head><body><div class="page">
+
+<main class="landing-page">
+    <nav class="landing-nav">
+        <a class="landing-brand" href="/">
+            <span class="landing-brand-icon"><i class="fa-solid fa-leaf"></i></span>
+            <span>Wellness</span>
+        </a>
+        <div class="landing-links">
+            <a href="/">Home</a>
+            <a href="#login">Programs</a>
+            <a href="#login">Community</a>
+            <a href="#login">Resources</a>
+        </div>
+    </nav>
+
+    <section class="landing-hero">
+        <div class="hero-copy">
+            <span class="hero-kicker"><i class="fa-solid fa-sparkles"></i> Your everyday wellness companion</span>
+            <h1>Your <em>path</em> to wellness<br>starts here.</h1>
+            <p>A calm, supportive space to understand your wellbeing, build healthier habits, and move forward with confidence.</p>
+            <div class="hero-actions">
+                <a class="hero-button hero-button-light" href="#login" onclick="openAuth('login')">Login</a>
+                <a class="hero-button hero-button-glass" href="#login" onclick="openAuth('register')">Register <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<section class="auth-section" id="login" aria-label="Login and registration">
+<div class="auth-card">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div>
+                <h1>Wellness</h1>
+                <span>Healthy Mind. Healthy Life.</span>
+            </div>
+
+        </div>
+
+        <div class="left-content">
+
+            <h2>
+                Take care of your
+                <br>
+                mind & body.
+            </h2>
+
+            <p>
+                Your personal wellness journey starts here.
+                Build healthier habits and create a balanced
+                lifestyle with AI-powered wellness guidance.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-person-praying"></i>
+                    </div>
+                    <span>Personalized Wellness</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-spa"></i>
+                    </div>
+                    <span>Yoga & Meditation</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <span>Healthy Lifestyle</span>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <span>Track Your Progress</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="tabs">
+
+            <button id="loginTab"
+                    class="tab active"
+                    onclick="showLogin()">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+
+            </button>
+
+            <button id="registerTab"
+                    class="tab"
+                    onclick="showRegister()">
+
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <div id="loginBox" class="form-box">
+
+            <div class="heading">
+
+                <h2>Welcome Back!</h2>
+
+                <p>
+                    Login to continue your journey.
+                </p>
+
+            </div>
+
+            <form onsubmit="loginUser(event)">
+
+                <label>Email Address</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="text"
+                        inputmode="email"
+                        id="loginEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <label>Password</label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <i class="fa-solid fa-eye password-eye"
+                       onclick="togglePassword('loginPassword', this)">
+                    </i>
+
+                </div>
+
+                <a class="forgot-link" href="#">Forgot Password?</a>
+
+
+                <button class="main-btn" type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <div id="loginMessage" class="message"></div>
+
+            <div class="social-divider"><span>or continue with</span></div>
+
+            <div class="social-buttons" aria-label="Social login options">
+                <button type="button" class="social-button" aria-label="Continue with Google"><i class="fa-brands fa-google"></i></button>
+                <button type="button" class="social-button" aria-label="Continue with Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+                <button type="button" class="social-button" aria-label="Continue with Apple"><i class="fa-brands fa-apple"></i></button>
+            </div>
+
+            <div class="bottom-text">
+                <span class="bottom-question">Don't have an account?</span>
+                <span onclick="showRegister()">Sign up</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER FORM -->
+
+        <div id="registerBox" class="form-box hidden">
+
+            <div class="heading">
+
+                <h2>Create Account</h2>
+
+                <p>
+                    Start your wellness journey today.
+                </p>
+
+            </div>
+
+
+            <form onsubmit="registerUser(event)">
+
+                <div class="register-grid">
+                    <div class="register-field">
+                        <label>Full Name</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="registerName" placeholder="Enter your name" required>
+                        </div>
+                    </div>
+
+                    <div class="register-field">
+                        <label>Email</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="text" inputmode="email" id="registerEmail" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+
+                    <div class="register-field">
+                        <label>Password</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="registerPassword" placeholder="Create a password" required>
+                            <i class="fa-solid fa-eye password-eye" onclick="togglePassword('registerPassword', this)"></i>
+                        </div>
+                    </div>
+
+                    <div class="register-field">
+                        <label>Gender</label>
+                        <div class="input-box">
+                            <i class="fa-solid fa-venus-mars"></i>
+                            <select id="registerGender" aria-label="Select gender">
+                                <option value="">Select gender</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <label>Bio</label>
+                <div class="input-box bio-box">
+                    <i class="fa-solid fa-pen"></i>
+                    <input type="text" id="registerBio" placeholder="Tell us a little about yourself">
+                </div>
+
+
+                <button class="main-btn" type="submit">
+                    Sign Up
+                </button>
+
+            </form>
+
+
+            <div id="registerMessage" class="message"></div>
+
+            <div class="social-divider"><span>or continue with</span></div>
+
+            <div class="social-buttons" aria-label="Social registration options">
+                <button type="button" class="social-button" aria-label="Continue with Google"><i class="fa-brands fa-google"></i></button>
+                <button type="button" class="social-button" aria-label="Continue with Facebook"><i class="fa-brands fa-facebook-f"></i></button>
+                <button type="button" class="social-button" aria-label="Continue with Apple"><i class="fa-brands fa-apple"></i></button>
+            </div>
+
+
+            <div class="bottom-text">
+
+                <span class="bottom-question">Already have an account?</span>
+                <span onclick="showLogin()">Login</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+</div><script src="{{ url_for('static', filename='login.js') }}"></script></body>
+</html>

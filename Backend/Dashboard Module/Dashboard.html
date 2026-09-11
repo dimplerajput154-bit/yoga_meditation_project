@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wellness Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='Dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-mark"><i class="fa-solid fa-leaf"></i></div>
+            <span>Wellness<small>Good health. Better you.</small></span>
+        </div>
+
+        <nav>
+            <button class="menu active"><i class="fa-solid fa-house"></i> Dashboard</button>
+            <button class="menu"><i class="fa-solid fa-person-running"></i> Yoga</button>
+            <button class="menu"><i class="fa-solid fa-spa"></i> Meditation</button>
+            <button class="menu"><i class="fa-solid fa-heart-pulse"></i> Mental Wellness</button>
+            <button class="menu"><i class="fa-solid fa-utensils"></i> Recipes</button>
+            <button class="menu" type="button" onclick="openOrganizations()"><i class="fa-solid fa-people-group"></i> Organizations</button>
+            <button class="menu"><i class="fa-solid fa-book"></i> Books</button>
+            <button class="menu"><i class="fa-solid fa-box-open"></i> Products</button>
+            <button class="menu"><i class="fa-solid fa-moon"></i> Sleep Tracker</button>
+            <button class="menu"><i class="fa-solid fa-face-smile"></i> Mood Tracker</button>
+            <button class="menu"><i class="fa-solid fa-notes-medical"></i> Health Profile</button>
+            <button class="menu"><i class="fa-solid fa-book-medical"></i> Health & Remedies</button>
+            <button class="menu"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Assistant</button>
+            <button class="menu"><i class="fa-regular fa-heart"></i> Favorites</button>
+            <button class="menu"><i class="fa-solid fa-download"></i> Downloads</button>
+            <button class="menu"><i class="fa-solid fa-gear"></i> Settings</button>
+        </nav>
+
+        <button class="logout" onclick="logout()">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div>
+                <h1><span id="welcomeText">Welcome back</span>, <span id="userName">User</span> 👋</h1>
+                <p>Take care of your mind and body today.</p>
+            </div>
+
+            <div class="profile-icon">
+                👤
+            </div>
+
+        </header>
+
+
+        <!-- Wellness Cards -->
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-icon">😴</div>
+
+                <h3>Sleep</h3>
+
+                <h2 id="sleepHours">--</h2>
+
+                <p id="sleepStatus">Loading...</p>
+            </div>
+
+
+            <div class="card">
+                <div class="card-icon">😊</div>
+
+                <h3>Mood</h3>
+
+                <h2 id="moodScore">--</h2>
+
+                <p id="moodPercentage">--</p>
+            </div>
+
+
+            <div class="card">
+                <div class="card-icon">🧘</div>
+
+                <h3>Yoga</h3>
+
+                <h2>
+                    <span id="yogaMinutes">0</span>
+                    min
+                </h2>
+
+                <p>
+                    Goal:
+                    <span id="yogaGoal">0</span> min
+                </p>
+            </div>
+
+
+            <div class="card">
+                <div class="card-icon">💧</div>
+
+                <h3>Water</h3>
+
+                <h2>
+                    <span id="waterGlasses">0</span>
+                    / 8
+                </h2>
+
+                <p>Glasses today</p>
+            </div>
+
+        </section>
+
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+
+            <div class="progress-card">
+
+                <h2>🚶 Daily Steps</h2>
+
+                <div class="step-number">
+                    <span id="stepsCount">0</span>
+                    /
+                    <span id="stepsGoal">0</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div id="stepsProgress"></div>
+                </div>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <h2>💧 Water Goal</h2>
+
+                <div class="step-number">
+                    <span id="waterCount">0</span>
+                    /
+                    <span id="waterGoal">0</span>
+                    glasses
+                </div>
+
+                <div class="progress-bar">
+                    <div id="waterProgress"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Tasks -->
+        <section class="tasks-section">
+
+            <div class="section-title">
+                <h2>Today's Wellness Tasks</h2>
+                <span id="taskCount">0 Tasks</span>
+            </div>
+
+            <div id="tasksContainer">
+
+                <p class="loading">
+                    Loading tasks...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+<script src="{{ url_for('static', filename='Dashboard.js') }}"></script>
+
+</body>
+</html>

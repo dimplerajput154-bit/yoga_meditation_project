@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Discussions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='discussion.css') }}">
+</head>
+<body>
+    <div class="discussion-app">
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i class="fa-solid fa-leaf"></i></div>
+                <span>Wellness<small>Good health. Better you.</small></span>
+            </div>
+
+            <nav>
+                <button class="menu" onclick="window.location.href='http://127.0.0.1:5000/'"><i class="fa-solid fa-house"></i> Dashboard</button>
+                <button class="menu"><i class="fa-solid fa-person-running"></i> Yoga</button>
+                <button class="menu"><i class="fa-solid fa-spa"></i> Meditation</button>
+                <button class="menu"><i class="fa-solid fa-heart-pulse"></i> Mental Wellness</button>
+                <button class="menu"><i class="fa-solid fa-utensils"></i> Recipes</button>
+                <button class="menu" onclick="window.location.href='http://127.0.0.1:5002/'"><i class="fa-solid fa-people-group"></i> Organizations</button>
+                <button class="menu active"><i class="fa-solid fa-comments"></i> Discussions</button>
+                <button class="menu"><i class="fa-solid fa-book"></i> Books</button>
+                <button class="menu"><i class="fa-solid fa-moon"></i> Sleep Tracker</button>
+                <button class="menu"><i class="fa-solid fa-face-smile"></i> Mood Tracker</button>
+                <button class="menu"><i class="fa-solid fa-notes-medical"></i> Health Profile</button>
+            </nav>
+
+            <button class="logout" onclick="logoutUser()">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <span class="eyebrow">Community care</span>
+                    <h1>Discussions</h1>
+                    <p>Share questions, reflections, and wellness ideas with your organizations.</p>
+                </div>
+                <button class="primary-button" type="button" onclick="openCreatePanel()">
+                    <i class="fa-solid fa-plus"></i>
+                    New discussion
+                </button>
+            </header>
+
+            <section class="summary-grid">
+                <article class="summary-card">
+                    <span><i class="fa-solid fa-message"></i></span>
+                    <div><small>Total discussions</small><strong id="totalCount">0</strong></div>
+                </article>
+                <article class="summary-card">
+                    <span><i class="fa-solid fa-user-pen"></i></span>
+                    <div><small>My discussions</small><strong id="myCount">0</strong></div>
+                </article>
+                <article class="summary-card">
+                    <span><i class="fa-solid fa-building-user"></i></span>
+                    <div><small>Organizations</small><strong id="orgCount">0</strong></div>
+                </article>
+            </section>
+
+            <section class="toolbar">
+                <label class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="searchInput" type="search" placeholder="Search title, content, author, or organization">
+                </label>
+                <label class="filter-box">
+                    <span>Organization</span>
+                    <select id="organizationFilter">
+                        <option value="">All organizations</option>
+                    </select>
+                </label>
+            </section>
+
+            <section class="content-layout">
+                <div class="discussion-list" id="discussionList">
+                    <p class="state-message">Loading discussions...</p>
+                </div>
+                <aside class="detail-panel" id="detailPanel">
+                    <div class="empty-detail">
+                        <i class="fa-solid fa-comments"></i>
+                        <h2>Select a discussion</h2>
+                        <p>Open a discussion to read the full post and manage your own entries.</p>
+                    </div>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="discussionModal" aria-hidden="true">
+        <div class="modal">
+            <button class="close-button" type="button" onclick="closeDiscussionModal()" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span class="eyebrow" id="modalEyebrow">Start a conversation</span>
+            <h2 id="modalTitle">Create discussion</h2>
+
+            <form id="discussionForm">
+                <input id="discussionId" type="hidden">
+                <label>
+                    Organization
+                    <select id="discussionOrganization" required>
+                        <option value="">Choose organization</option>
+                    </select>
+                </label>
+                <label>
+                    Title
+                    <input id="discussionTitle" type="text" maxlength="150" minlength="5" required placeholder="What would you like to discuss?">
+                </label>
+                <label>
+                    Content
+                    <textarea id="discussionContent" rows="7" minlength="10" required placeholder="Share your thoughts clearly and kindly."></textarea>
+                </label>
+                <button class="primary-button full-button" type="submit" id="saveButton">Create discussion</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+    <script src="{{ url_for('static', filename='discussion.js') }}"></script>
+</body>
+</html>
